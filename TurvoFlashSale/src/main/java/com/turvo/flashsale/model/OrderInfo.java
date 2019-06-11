@@ -3,6 +3,8 @@ package com.turvo.flashsale.model;
 import java.util.Date;
 import java.util.List;
 
+import com.turvo.flashsale.bean.Account;
+
 public class OrderInfo {
 
 	private String id;
@@ -10,10 +12,7 @@ public class OrderInfo {
 	private int orderNum;
 	private double amount;
 
-	private String customerName;
-	private String customerAddress;
-	private String customerEmail;
-	private String customerPhone;
+	private Account customerInfo;
 
 	private List<OrderDetailInfo> details;
 
@@ -23,17 +22,13 @@ public class OrderInfo {
 
 	// Using for Hibernate Query.
 	public OrderInfo(String id, Date orderDate, int orderNum, //
-			double amount, String customerName, String customerAddress, //
-			String customerEmail, String customerPhone) {
+			double amount,Account account) {
 		this.id = id;
 		this.orderDate = orderDate;
 		this.orderNum = orderNum;
 		this.amount = amount;
-
-		this.customerName = customerName;
-		this.customerAddress = customerAddress;
-		this.customerEmail = customerEmail;
-		this.customerPhone = customerPhone;
+this.customerInfo = account;
+		
 	}
 
 	public String getId() {
@@ -68,36 +63,13 @@ public class OrderInfo {
 		this.amount = amount;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+
+	public Account getCustomerInfo() {
+		return customerInfo;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-	public String getCustomerAddress() {
-		return customerAddress;
-	}
-
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
-	}
-
-	public String getCustomerEmail() {
-		return customerEmail;
-	}
-
-	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
-	}
-
-	public String getCustomerPhone() {
-		return customerPhone;
-	}
-
-	public void setCustomerPhone(String customerPhone) {
-		this.customerPhone = customerPhone;
+	public void setCustomerInfo(Account customerInfo) {
+		this.customerInfo = customerInfo;
 	}
 
 	public List<OrderDetailInfo> getDetails() {

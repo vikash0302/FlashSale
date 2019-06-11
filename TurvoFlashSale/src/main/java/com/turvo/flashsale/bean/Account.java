@@ -36,7 +36,7 @@ public class Account implements Serializable {
     @NotNull
     private boolean active;
  
-    @Column(name = "User_Role", length = 20)
+    @Column(name = "User_Role", length = 20,insertable = false,updatable = false)
     @NotBlank
     private String userRole;
  
@@ -51,6 +51,9 @@ public class Account implements Serializable {
     @Column(name = "User_Phone")
     private String phone;
     
+    @ManyToOne
+   	@JoinColumn(name="user_role")
+   	private Role role;
     
     public String getUserName() {
         return userName;
@@ -76,6 +79,14 @@ public class Account implements Serializable {
         this.active = active;
     }
  
+    public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+    
     public String getUserRole() {
         return userRole;
     }

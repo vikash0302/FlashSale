@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
  
@@ -41,6 +43,11 @@ public class Order implements Serializable {
     @Column(name = "Customer_Phone", length = 128, nullable = false)
     private String customerPhone;
  
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private Account account;
+
+    
     public String getId() {
         return id;
     }
@@ -104,5 +111,15 @@ public class Order implements Serializable {
     public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+    
+    
  
 }

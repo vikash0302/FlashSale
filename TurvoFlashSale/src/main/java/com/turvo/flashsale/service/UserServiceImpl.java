@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.turvo.flashsale.bean.Account;
+import com.turvo.flashsale.bean.Role;
 import com.turvo.flashsale.dao.AccountDAO;
 
 @Service("userService")
@@ -16,8 +17,14 @@ public class UserServiceImpl implements UserService {
 		if (isUserExist(customerInfo)) {
 			return false;
 		} else {
-			accountDAO.createAccount(customerInfo);
-			return true;
+			Role role = accountDAO.getRole(customerInfo.getUserRole());
+			if (role != null) {
+				customerInfo.setRole(role);
+				accountDAO.createAccount(customerInfo);
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 

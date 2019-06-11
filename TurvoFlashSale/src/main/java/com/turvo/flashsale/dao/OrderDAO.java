@@ -81,7 +81,7 @@ public class OrderDAO {
 			order.setCustomerEmail(customerInfo.getEmail());
 			order.setCustomerPhone(customerInfo.getPhone());
 			order.setCustomerAddress(customerInfo.getAddress());
-
+			order.setAccount(customerInfo);
 			List<CartLineInfo> lines = cartInfo.getCartLines();
 			int saveOrder = 0;
 			for (CartLineInfo line : lines) {
@@ -139,7 +139,7 @@ public class OrderDAO {
 								soldProduct.setQuantity(line.getQuantity());
 								soldProduct.setSoldDate(new Date());
 							}
-							session.saveOrUpdate(soldProduct);
+							session.persist(soldProduct);
 						} finally {
 							lock.unlock();
 						}
@@ -192,8 +192,8 @@ public class OrderDAO {
 			return null;
 		}
 		return new OrderInfo(order.getId(), order.getOrderDate(), //
-				order.getOrderNum(), order.getAmount(), order.getCustomerName(), //
-				order.getCustomerAddress(), order.getCustomerEmail(), order.getCustomerPhone());
+				order.getOrderNum(), order.getAmount(), order.getAccount());
+
 	}
 
 	public List<OrderDetailInfo> listOrderDetailInfos(String orderId) {
